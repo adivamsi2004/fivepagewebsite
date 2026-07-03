@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<!--
+  =====================================================================
+  MARROW & TYPE — About (about.html)
+  =====================================================================
+  Same shared styles.css / script.js as every other page. The new CSS
+  idea here is the "milestones" timeline: instead of CSS auto-numbering
+  each item (like the 1-2-3 process list on services.html), each list
+  item carries its own real year in a data-year="..." attribute, and
+  CSS reads that value directly with the attr() function. Good contrast
+  between "let CSS count for me" (services.html) and "CSS displays a
+  value I already have in the HTML" (this page).
+  =====================================================================
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>About — Marrow &amp; Type</title>
+  <meta name="description" content="The story, the people, and the values behind Marrow & Type's one-room letterpress studio." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..700&family=JetBrains+Mono:wght@400;500&family=Lora:ital,wght@0,400;0,500;1,400&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <!-- HEADER — same markup as the other pages, aria-current on "About". -->
+  <header class="site-header" id="top">
+    <div class="wrap header-inner">
+      <a href="index.html" class="brand" aria-label="Marrow & Type — home">
+        <span class="brand-mark" aria-hidden="true">M&amp;T</span>
+        <span class="brand-name">Marrow <em>&amp;</em> Type</span>
+      </a>
+
+      <button
+        class="nav-toggle"
+        id="nav-toggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="primary-nav"
+      >
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+        <span class="visually-hidden">Menu</span>
+      </button>
+
+      <nav class="primary-nav" id="primary-nav" aria-label="Primary">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="products.html">Products</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="about.html" aria-current="page">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content">
+
+    <!-- ---------------- PAGE HERO ---------------- -->
+    <section class="page-hero">
+      <div class="wrap">
+        <p class="eyebrow">The studio</p>
+        <h1>Two people, one press, since 2015</h1>
+        <p class="hero-lede">
+          Marrow &amp; Type started as a wedding-invitation side project and
+          slowly became a full-time studio. Here's how that happened, and
+          who's actually running the press.
+        </p>
+      </div>
+    </section>
+
+    <!-- ---------------- STORY ---------------- -->
+    <section class="section" aria-labelledby="story-heading">
+      <div class="wrap about-inner">
+        <div>
+          <p class="eyebrow">Our story</p>
+          <h2 id="story-heading">It started with a broken press and a bad quote</h2>
+          <p>
+            In 2015, a friend's wedding invitation quote came back with a
+            six-week lead time and a price that didn't match the flimsy
+            paper sample attached. We'd just picked up a rusted tabletop
+            proofing press at an estate sale for parts. Three weekends of
+            cleaning it up later, we printed that invitation ourselves.
+          </p>
+          <p>
+            Word got around faster than expected. What was meant to be a
+            one-off favor turned into a waitlist, then a spare room, then
+            an actual studio lease. We still use that same press today —
+            it's just no longer held together with parts from three
+            different machines.
+          </p>
+        </div>
+        <div class="plate-swatch" aria-hidden="true">M</div>
+      </div>
+    </section>
+
+    <!-- ---------------- MILESTONES ----------------
+         A genuine chronological sequence, so a timeline is meaningful
+         here (unlike decorative numbering with no real order behind
+         it). Each <li> stores its own year in data-year; CSS pulls
+         that value straight out of the HTML with attr(). -->
+    <section class="section section-muted" aria-labelledby="milestones-heading">
+      <div class="wrap">
+        <p class="eyebrow">Milestones</p>
+        <h2 id="milestones-heading">A short history, in years</h2>
+
+        <ol class="milestone-list">
+          <li data-year="2015">
+            <p>First press purchased secondhand; first wedding invitation printed in a spare bedroom.</p>
+          </li>
+          <li data-year="2017">
+            <p>Moved into the current one-room studio space and took on our first regular stationery clients.</p>
+          </li>
+          <li data-year="2019">
+            <p>Added foil stamping and embossing to the studio's capabilities.</p>
+          </li>
+          <li data-year="2022">
+            <p>Launched the numbered art edition series, printed in runs of 50.</p>
+          </li>
+          <li data-year="2026">
+            <p>This website — the first time our full catalog has lived online in one place.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ---------------- TEAM ---------------- -->
+    <section class="section" aria-labelledby="team-heading">
+      <div class="wrap">
+        <p class="eyebrow">Who's printing</p>
+        <h2 id="team-heading">The two of us</h2>
+
+        <div class="team-grid">
+          <article class="team-card">
+            <div class="team-avatar" aria-hidden="true">R</div>
+            <h3>Rosa Kimura</h3>
+            <p class="eyebrow">Founder &amp; Press Operator</p>
+            <p>Runs every press pass herself and still hand-sets type for the art edition series.</p>
+          </article>
+
+          <article class="team-card">
+            <div class="team-avatar" aria-hidden="true">D</div>
+            <h3>Devon Achebe</h3>
+            <p class="eyebrow">Design &amp; Client Projects</p>
+            <p>Handles custom layouts, client consultations, and keeps the paper drawer organized.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------------- VALUES ---------------- -->
+    <section class="section section-muted" aria-labelledby="values-heading">
+      <div class="wrap">
+        <p class="eyebrow">What we care about</p>
+        <h2 id="values-heading">Three things we won't compromise on</h2>
+
+        <div class="card-grid">
+          <article class="card">
+            <h3>Real impression</h3>
+            <p>If it doesn't have depth you can feel, it's not leaving the studio.</p>
+          </article>
+          <article class="card">
+            <h3>Small runs</h3>
+            <p>We limit how much we take on so quality doesn't slide as volume goes up.</p>
+          </article>
+          <article class="card">
+            <h3>Honest timelines</h3>
+            <p>We'd rather tell you six weeks upfront than promise two and miss it.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------------- CTA ---------------- -->
+    <section class="section">
+      <div class="wrap contact-inner">
+        <div>
+          <p class="eyebrow">Come say hello</p>
+          <h2>Studio visits are welcome</h2>
+          <p>
+            Want to see the press in person before booking a project? Reach
+            out and we'll set up a time.
+          </p>
+          <a class="btn btn-primary" href="contact.html">Get in touch</a>
+        </div>
+        <div class="plate-swatch" aria-hidden="true">T</div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <nav aria-label="Footer">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="products.html">Products</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+      <p>&copy; <span id="current-year">2026</span> Marrow &amp; Type Studio.</p>
+    </div>
+  </footer>
+
+  <script type="module" src="script.js"></script>
+</body>
+</html>

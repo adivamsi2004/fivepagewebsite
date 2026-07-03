@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<!--
+  =====================================================================
+  MARROW & TYPE — Services (services.html)
+  =====================================================================
+  Same shared styles.css / script.js as the other pages. The one new
+  idea on this page is the FAQ section near the bottom, built with
+  native <details>/<summary> elements — a good reminder that HTML
+  itself already knows how to do some "interactive" things (expand/
+  collapse) with ZERO JavaScript. Compare that to the filter buttons
+  on products.html, which genuinely needed JS because "only show cards
+  matching X" isn't something plain HTML can express on its own.
+  =====================================================================
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Services — Marrow &amp; Type</title>
+  <meta name="description" content="From custom typesetting to foil finishing — how Marrow & Type takes a project from idea to printed sheet." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..700&family=JetBrains+Mono:wght@400;500&family=Lora:ital,wght@0,400;0,500;1,400&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <!-- HEADER — same markup as the other pages, aria-current on "Services". -->
+  <header class="site-header" id="top">
+    <div class="wrap header-inner">
+      <a href="index.html" class="brand" aria-label="Marrow & Type — home">
+        <span class="brand-mark" aria-hidden="true">M&amp;T</span>
+        <span class="brand-name">Marrow <em>&amp;</em> Type</span>
+      </a>
+
+      <button
+        class="nav-toggle"
+        id="nav-toggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="primary-nav"
+      >
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+        <span class="visually-hidden">Menu</span>
+      </button>
+
+      <nav class="primary-nav" id="primary-nav" aria-label="Primary">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="products.html">Products</a></li>
+          <li><a href="services.html" aria-current="page">Services</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content">
+
+    <!-- ---------------- PAGE HERO ---------------- -->
+    <section class="page-hero">
+      <div class="wrap">
+        <p class="eyebrow">What we do</p>
+        <h1>Design, print, and finish — start to finish</h1>
+        <p class="hero-lede">
+          Some clients arrive with finished artwork ready to print. Others
+          arrive with a napkin sketch. Either way, these are the services
+          that get a project from idea to a stack of finished sheets.
+        </p>
+      </div>
+    </section>
+
+    <!-- ---------------- SERVICE GRID ---------------- -->
+    <section class="section">
+      <div class="wrap">
+        <div class="card-grid">
+
+          <article class="card">
+            <h3>Custom Typesetting</h3>
+            <p>We hand-set or digitally compose your layout, choosing type families that actually exist as physical plates in the studio.</p>
+          </article>
+
+          <article class="card">
+            <h3>Letterpress Printing</h3>
+            <p>One to four ink colors, run on our proofing press at a depth of impression you can feel with your thumb.</p>
+          </article>
+
+          <article class="card">
+            <h3>Foil Stamping</h3>
+            <p>Metallic gold, silver, or copper foil, stamped separately from ink runs for a crisp, reflective finish.</p>
+          </article>
+
+          <article class="card">
+            <h3>Embossing &amp; Debossing</h3>
+            <p>Blind (inkless) impressions for a subtle, tactile mark — often paired with a single ink color elsewhere on the sheet.</p>
+          </article>
+
+          <article class="card">
+            <h3>Paper &amp; Envelope Sourcing</h3>
+            <p>We stock cotton, recycled, and specialty stocks in-house, and can source anything unusual a project calls for.</p>
+          </article>
+
+          <article class="card">
+            <h3>Design Consultation</h3>
+            <p>A sit-down (or video call) to work through layout, ink colors, and paper before anything goes near the press.</p>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------------- PROCESS ----------------
+         This IS a genuine sequence (each step depends on the one
+         before it finishing), so numbering it is meaningful — unlike
+         slapping "01 / 02 / 03" on cards that don't have any real
+         order. We use a semantic <ol> for exactly that reason. -->
+    <section class="section section-muted" aria-labelledby="process-heading">
+      <div class="wrap">
+        <p class="eyebrow">How a project moves</p>
+        <h2 id="process-heading">Five steps, roughly three weeks</h2>
+
+        <ol class="process-list">
+          <li>
+            <h3>Consult</h3>
+            <p>We talk through what you're printing, your timeline, and your budget.</p>
+          </li>
+          <li>
+            <h3>Proof &amp; Design</h3>
+            <p>You'll see a digital proof, then (for most orders) a physical press proof before we commit to a full run.</p>
+          </li>
+          <li>
+            <h3>Set the Plate</h3>
+            <p>Your approved design is etched onto a photopolymer or hand-set metal plate.</p>
+          </li>
+          <li>
+            <h3>Press Run</h3>
+            <p>Sheets are fed and printed one at a time, one ink color per pass.</p>
+          </li>
+          <li>
+            <h3>Finish &amp; Ship</h3>
+            <p>Trimming, folding, and packing, then it ships or you pick it up from the studio.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ---------------- FAQ ----------------
+         <details>/<summary> is a native HTML disclosure widget: click
+         the <summary> and the browser shows/hides everything else
+         inside <details> — no JavaScript, no ARIA attributes needed,
+         because the semantics (expanded/collapsed, keyboard support,
+         screen reader announcements) are built into the element itself. -->
+    <section class="section" aria-labelledby="faq-heading">
+      <div class="wrap">
+        <p class="eyebrow">Before you ask</p>
+        <h2 id="faq-heading">Frequently asked questions</h2>
+
+        <div class="faq-list">
+          <details>
+            <summary>How far in advance should I order?</summary>
+            <p>For weddings, 3–4 months before you need to mail invitations. For business stationery or art prints, 2–3 weeks is usually enough.</p>
+          </details>
+
+          <details>
+            <summary>Can you match a Pantone ink color?</summary>
+            <p>Yes — we mix ink to Pantone spot colors for every order. Bring a swatch or a Pantone number and we'll match it as closely as letterpress ink allows.</p>
+          </details>
+
+          <details>
+            <summary>Do you print outside the categories on the Products page?</summary>
+            <p>Often, yes. Menus, packaging, gig posters, and zine covers are all things we've printed before — get in touch and we'll tell you honestly if it's a good fit for letterpress.</p>
+          </details>
+
+          <details>
+            <summary>What file format do you need for custom artwork?</summary>
+            <p>Vector files (AI, EPS, or PDF with outlined type) work best. If you only have a sketch or a reference image, our design consultation covers building it into print-ready artwork.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------------- CTA ---------------- -->
+    <section class="section section-muted">
+      <div class="wrap contact-inner">
+        <div>
+          <p class="eyebrow">Next step</p>
+          <h2>Tell us about your project</h2>
+          <p>
+            Whether you know exactly what you want or just have a rough
+            idea, the consultation is the best place to start.
+          </p>
+          <a class="btn btn-primary" href="contact.html">Book a consultation</a>
+        </div>
+        <div class="plate-swatch" aria-hidden="true">§</div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <nav aria-label="Footer">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="products.html">Products</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+      <p>&copy; <span id="current-year">2026</span> Marrow &amp; Type Studio.</p>
+    </div>
+  </footer>
+
+  <script type="module" src="script.js"></script>
+</body>
+</html>

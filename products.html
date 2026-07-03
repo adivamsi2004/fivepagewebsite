@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<!--
+  =====================================================================
+  MARROW & TYPE — Products (products.html)
+  =====================================================================
+  This page reuses the SAME styles.css and script.js as index.html.
+  That's the whole point of separating structure/presentation/behaviour
+  into their own files: we don't rewrite the header, footer, colors, or
+  nav-toggle logic — we just reuse them and add page-specific markup
+  (the "page-hero" and "product catalog" sections below) plus a small
+  amount of page-specific CSS/JS appended to the shared files.
+  =====================================================================
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Products — Marrow &amp; Type</title>
+  <meta name="description" content="Browse Marrow & Type's letterpress catalog: wedding suites, business stationery, and numbered art editions." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..700&family=JetBrains+Mono:wght@400;500&family=Lora:ital,wght@0,400;0,500;1,400&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <!-- HEADER — identical markup to index.html, except aria-current has
+       moved to the "Products" link so it reflects where we are now. -->
+  <header class="site-header" id="top">
+    <div class="wrap header-inner">
+      <a href="index.html" class="brand" aria-label="Marrow & Type — home">
+        <span class="brand-mark" aria-hidden="true">M&amp;T</span>
+        <span class="brand-name">Marrow <em>&amp;</em> Type</span>
+      </a>
+
+      <button
+        class="nav-toggle"
+        id="nav-toggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="primary-nav"
+      >
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+        <span class="visually-hidden">Menu</span>
+      </button>
+
+      <nav class="primary-nav" id="primary-nav" aria-label="Primary">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="products.html" aria-current="page">Products</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content">
+
+    <!-- ---------------- PAGE HERO ----------------
+         A shorter hero than the homepage's — inner pages don't need
+         the full "first impression" treatment, just a clear heading
+         and a one-line orientation for the visitor. -->
+    <section class="page-hero">
+      <div class="wrap">
+        <p class="eyebrow">The catalog</p>
+        <h1>Everything we print, in three families</h1>
+        <p class="hero-lede">
+          Every piece below starts as a hand-set or photopolymer plate and
+          is run one sheet at a time. Prices are starting points — every
+          quote is adjusted for paper stock, ink colors, and quantity.
+        </p>
+      </div>
+    </section>
+
+    <!-- ---------------- FILTER BAR ----------------
+         data-filter on each button matches data-category on each
+         product card below. script.js reads these attributes to show/
+         hide cards — no page reload, no framework needed. -->
+    <div class="wrap">
+      <div class="filter-bar" role="group" aria-label="Filter products by category">
+        <button type="button" class="filter-btn is-active" data-filter="all">All</button>
+        <button type="button" class="filter-btn" data-filter="wedding">Wedding</button>
+        <button type="button" class="filter-btn" data-filter="stationery">Stationery</button>
+        <button type="button" class="filter-btn" data-filter="art">Art Editions</button>
+      </div>
+    </div>
+
+    <!-- ---------------- PRODUCT GRID ---------------- -->
+    <section class="section">
+      <div class="wrap">
+        <div class="product-grid" id="product-grid">
+
+          <!-- Each product card carries data-category so script.js can
+               match it against the active filter button. -->
+          <article class="card product-card" data-category="wedding">
+            <p class="eyebrow">Wedding</p>
+            <h3>Invitation Suite</h3>
+            <p>Invitation, RSVP card, and envelope liner printed as a matched set, in your choice of two ink colors.</p>
+            <p class="price-tag">From $340 / 50 suites</p>
+            <a class="btn btn-ghost" href="contact.html">Request a quote</a>
+          </article>
+
+          <article class="card product-card" data-category="wedding">
+            <p class="eyebrow">Wedding</p>
+            <h3>Save the Date Cards</h3>
+            <p>Single-color cards on 110lb cotton stock, sized to fit a standard A2 envelope.</p>
+            <p class="price-tag">From $180 / 50 cards</p>
+            <a class="btn btn-ghost" href="contact.html">Request a quote</a>
+          </article>
+
+          <article class="card product-card" data-category="wedding">
+            <p class="eyebrow">Wedding</p>
+            <h3>Day-of Paper Set</h3>
+            <p>Menus, place cards, and a table number, all set in a matching type family to your invitation suite.</p>
+            <p class="price-tag">From $220 / 25 guests</p>
+            <a class="btn btn-ghost" href="contact.html">Request a quote</a>
+          </article>
+
+          <article class="card product-card" data-category="stationery">
+            <p class="eyebrow">Stationery</p>
+            <h3>Letterpress Business Cards</h3>
+            <p>Two-sided cards on 220lb duplex stock — thick enough to hold a deep, tactile impression.</p>
+            <p class="price-tag">From $150 / 100 cards</p>
+            <a class="btn btn-ghost" href="contact.html">Request a quote</a>
+          </article>
+
+          <article class="card product-card" data-category="stationery">
+            <p class="eyebrow">Stationery</p>
+            <h3>Letterhead Set</h3>
+            <p>Letterhead, matching envelopes, and a compliment slip, printed from a single custom plate.</p>
+            <p class="price-tag">From $260 / 100 sheets</p>
+            <a class="btn btn-ghost" href="contact.html">Request a quote</a>
+          </article>
+
+          <article class="card product-card" data-category="stationery">
+            <p class="eyebrow">Stationery</p>
+            <h3>Correspondence Cards</h3>
+            <p>Flat note cards with a single monogram or wordmark, boxed in sets of ten.</p>
+            <p class="price-tag">From $95 / box of 10</p>
+            <a class="btn btn-ghost" href="contact.html">Request a quote</a>
+          </article>
+
+          <article class="card product-card" data-category="art">
+            <p class="eyebrow">Art edition</p>
+            <h3>Numbered Print Edition</h3>
+            <p>A limited run of 50, each print signed, numbered, and pulled by hand from a hand-carved plate.</p>
+            <p class="price-tag">From $65 / print</p>
+            <a class="btn btn-ghost" href="contact.html">Request a quote</a>
+          </article>
+
+          <article class="card product-card" data-category="art">
+            <p class="eyebrow">Art edition</p>
+            <h3>Botanical Broadside</h3>
+            <p>A large-format single-sheet print pairing a hand-set poem with a wood-engraved botanical.</p>
+            <p class="price-tag">From $85 / print</p>
+            <a class="btn btn-ghost" href="contact.html">Request a quote</a>
+          </article>
+
+          <article class="card product-card" data-category="art">
+            <p class="eyebrow">Art edition</p>
+            <h3>Type Specimen Poster</h3>
+            <p>A studio favorite — a full alphabet pulled from our oldest drawer of wood type, ink color rotates monthly.</p>
+            <p class="price-tag">From $45 / print</p>
+            <a class="btn btn-ghost" href="contact.html">Request a quote</a>
+          </article>
+
+        </div>
+
+        <!-- Shown by script.js only when a filter leaves zero matching
+             cards visible — an "empty state" is part of the interface
+             too, not just an edge case to ignore. -->
+        <p class="empty-state" id="empty-state" hidden>
+          No products in this category yet — check back soon.
+        </p>
+      </div>
+    </section>
+
+    <!-- ---------------- CUSTOM CTA ---------------- -->
+    <section class="section section-muted">
+      <div class="wrap contact-inner">
+        <div>
+          <p class="eyebrow">Don't see it here</p>
+          <h2>We take on custom plates too</h2>
+          <p>
+            Menus, packaging inserts, zine covers, gig posters — if it can
+            be printed one sheet at a time, we've probably tried it.
+          </p>
+          <a class="btn btn-primary" href="contact.html">Start a custom quote</a>
+        </div>
+        <div class="plate-swatch" aria-hidden="true">&amp;</div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <nav aria-label="Footer">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="products.html">Products</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+      <p>&copy; <span id="current-year">2026</span> Marrow &amp; Type Studio.</p>
+    </div>
+  </footer>
+
+  <script type="module" src="script.js"></script>
+</body>
+</html>

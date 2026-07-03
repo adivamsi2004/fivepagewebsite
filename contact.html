@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<!--
+  =====================================================================
+  MARROW & TYPE — Contact (contact.html)
+  =====================================================================
+  Same shared styles.css / script.js as every other page. This page's
+  form uses the SAME element IDs (#contact-form, #name, #email, etc.)
+  as the one on index.html. That's intentional and safe: only one
+  page's HTML is ever loaded into the browser at a time, so there's no
+  conflict — script.js just looks for #contact-form on whichever page
+  it's running on, finds it here too, and wires up the exact same
+  validation + honeypot + Web3Forms submission logic with no changes.
+  =====================================================================
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Contact — Marrow &amp; Type</title>
+  <meta name="description" content="Get a quote or book a studio visit with Marrow & Type, a small-batch letterpress studio." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..700&family=JetBrains+Mono:wght@400;500&family=Lora:ital,wght@0,400;0,500;1,400&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <!-- HEADER — same markup as the other pages, aria-current on "Contact". -->
+  <header class="site-header" id="top">
+    <div class="wrap header-inner">
+      <a href="index.html" class="brand" aria-label="Marrow & Type — home">
+        <span class="brand-mark" aria-hidden="true">M&amp;T</span>
+        <span class="brand-name">Marrow <em>&amp;</em> Type</span>
+      </a>
+
+      <button
+        class="nav-toggle"
+        id="nav-toggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="primary-nav"
+      >
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+        <span class="visually-hidden">Menu</span>
+      </button>
+
+      <nav class="primary-nav" id="primary-nav" aria-label="Primary">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="products.html">Products</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html" aria-current="page">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content">
+
+    <!-- ---------------- PAGE HERO ---------------- -->
+    <section class="page-hero">
+      <div class="wrap">
+        <p class="eyebrow">Get in touch</p>
+        <h1>Let's talk about what you're printing</h1>
+        <p class="hero-lede">
+          Fill in the form below, or use the studio details to call, email,
+          or stop by in person. We reply to every inquiry within two
+          business days.
+        </p>
+      </div>
+    </section>
+
+    <!-- ---------------- STUDIO INFO ---------------- -->
+    <section class="section">
+      <div class="wrap">
+        <!-- <dl> (description list) is the correct semantic element for
+             label/value pairs like these — screen readers announce the
+             relationship between each term and its description. -->
+        <dl class="info-grid">
+          <div class="info-item">
+            <dt>Studio address</dt>
+            <dd>412 Foundry Lane, Unit 3<br />Asheville, NC 28801</dd>
+          </div>
+          <div class="info-item">
+            <dt>Studio hours</dt>
+            <dd>Tuesday–Friday, 10am–5pm<br />Saturday by appointment</dd>
+          </div>
+          <div class="info-item">
+            <dt>Email</dt>
+            <dd><a href="mailto:hello@marrowandtype.example">hello@marrowandtype.example</a></dd>
+          </div>
+          <div class="info-item">
+            <dt>Phone</dt>
+            <dd><a href="tel:+18285550142">(828) 555-0142</a></dd>
+          </div>
+        </dl>
+      </div>
+    </section>
+
+    <!-- ---------------- CONTACT FORM ----------------
+         Identical field structure to the form on index.html — see the
+         long comment block in script.js's Section 3 for how the Zod
+         schema, honeypot, and Web3Forms submission work together. -->
+    <section class="section section-muted" id="contact" aria-labelledby="contact-heading">
+      <div class="wrap contact-inner">
+        <div class="contact-intro">
+          <p class="eyebrow">Project inquiry</p>
+          <h2 id="contact-heading">Tell us what you're printing</h2>
+          <p>
+            The more detail you give us — quantity, timeline, ink colors —
+            the more accurate your first quote will be.
+          </p>
+        </div>
+
+        <form id="contact-form" class="contact-form" novalidate>
+
+          <!-- Paste the SAME Web3Forms access key you used on index.html. -->
+          <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_ACCESS_KEY_HERE" />
+          <input type="hidden" name="from_name" value="Marrow & Type — Contact Page" />
+
+          <!-- Honeypot — identical to the homepage's form. -->
+          <div class="visually-hidden-honeypot" aria-hidden="true">
+            <label for="botcheck">Leave this field empty</label>
+            <input
+              type="checkbox"
+              id="botcheck"
+              name="botcheck"
+              tabindex="-1"
+              autocomplete="off"
+            />
+          </div>
+
+          <div class="form-row">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" autocomplete="name" />
+            <span class="field-error" id="name-error" aria-live="polite"></span>
+          </div>
+
+          <div class="form-row">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" autocomplete="email" />
+            <span class="field-error" id="email-error" aria-live="polite"></span>
+          </div>
+
+          <div class="form-row">
+            <label for="subject">Subject</label>
+            <input type="text" id="subject" name="subject" autocomplete="off" />
+            <span class="field-error" id="subject-error" aria-live="polite"></span>
+          </div>
+
+          <div class="form-row">
+            <label for="message">Project details</label>
+            <textarea id="message" name="message" rows="5"></textarea>
+            <span class="field-error" id="message-error" aria-live="polite"></span>
+          </div>
+
+          <button type="submit" class="btn btn-primary" id="submit-btn">
+            Send message
+          </button>
+
+          <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <nav aria-label="Footer">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="products.html">Products</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+      <p>&copy; <span id="current-year">2026</span> Marrow &amp; Type Studio.</p>
+    </div>
+  </footer>
+
+  <script type="module" src="script.js"></script>
+</body>
+</html>
