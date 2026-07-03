@@ -1,0 +1,633 @@
+/* =====================================================================
+   MARROW & TYPE — styles.css
+   =====================================================================
+   How to read this file (also a mini "CSS anatomy" lesson):
+
+   1. :root custom properties  → our design tokens (colors, type, spacing)
+   2. Reset / base rules       → sane defaults across all browsers
+   3. Layout utilities         → .wrap, .visually-hidden, etc.
+   4. Components, top to bottom, in the same order they appear in
+      index.html: header/nav → hero → cards → about → form → footer
+   5. Media queries            → responsive adjustments, mobile-first
+
+   Mobile-first means: the un-wrapped rules below target small screens
+   by default, and @media (min-width: ...) blocks ADD styling for
+   larger screens on top of that. This is usually easier to reason
+   about than the opposite ("desktop-first") approach.
+   ===================================================================== */
+
+/* ---------------------------------------------------------------------
+   1. DESIGN TOKENS
+   Custom properties (the --variable-name: value syntax) are just
+   named values we can reuse anywhere with var(--variable-name).
+   Defining them once here means changing the whole site's palette
+   later is a one-line edit instead of a find-and-replace.
+   --------------------------------------------------------------------- */
+:root {
+  /* Color palette — inspired by paper, ink, and letterpress printing */
+  --color-paper: #ede6d6;       /* main background: natural paper stock */
+  --color-paper-white: #faf8f2; /* lighter panels / cards */
+  --color-ink: #1f2320;         /* near-black ink, used for body text */
+  --color-ink-soft: #4a4f49;    /* softer ink for secondary text */
+  --color-red: #a8322d;         /* traditional letterpress red ink */
+  --color-brass: #9c7a3c;       /* brass plate / accent */
+  --color-shadow: #c9bfa8;      /* deboss/impression shadow on paper */
+  --color-error: #a8322d;       /* reuse the red ink tone for errors */
+  --color-success: #4b6d4f;     /* muted green for success states */
+
+  /* Typography */
+  --font-display: "Fraunces", Georgia, serif;
+  --font-body: "Lora", Georgia, serif;
+  --font-mono: "JetBrains Mono", "Courier New", monospace;
+
+  /* Spacing scale — using one scale everywhere keeps rhythm consistent */
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 1.75rem;
+  --space-lg: 3rem;
+  --space-xl: 5rem;
+
+  /* Shared layout values */
+  --content-width: 68rem;
+  --radius: 3px; /* letterpress cards are square-ish, not bubbly */
+}
+
+/* ---------------------------------------------------------------------
+   2. RESET / BASE RULES
+   Every browser ships slightly different default spacing/typography.
+   A small reset makes the page look the same everywhere we start from.
+   --------------------------------------------------------------------- */
+
+/* box-sizing: border-box means padding/border are INCLUDED in an
+   element's declared width, instead of added on top of it. This is
+   the single most-argued-about-yet-agreed-upon CSS rule in the
+   industry — almost every project uses it. */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Remove default margins browsers apply to these elements so we can
+   control spacing deliberately via our own spacing scale. */
+body,
+h1,
+h2,
+h3,
+p,
+figure,
+blockquote,
+ul,
+ol {
+  margin: 0;
+}
+
+html {
+  /* 100% keeps the base font-size at the browser default (usually
+     16px) but lets it respect a user's own font-size preferences —
+     better for accessibility than hard-coding "font-size: 16px". */
+  font-size: 100%;
+  scroll-behavior: smooth; /* smooth-scrolls to #contact, etc. */
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--color-ink);
+  background-color: var(--color-paper);
+  line-height: 1.6;
+
+  /* A very subtle repeating dot pattern to suggest paper "tooth"
+     (texture) without loading an actual image file. This is a nice
+     example of CSS doing decorative work that would otherwise need
+     an image asset. */
+  background-image: radial-gradient(var(--color-shadow) 0.6px, transparent 0.6px);
+  background-size: 18px 18px;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+}
+
+/* Respect users who've asked their OS to reduce motion — an
+   accessibility best practice, not just a nice-to-have. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* Visible focus outline for keyboard users. Never remove focus
+   outlines without replacing them with something equally visible —
+   it's one of the most common accessibility mistakes on the web. */
+:focus-visible {
+  outline: 3px solid var(--color-brass);
+  outline-offset: 2px;
+}
+
+/* ---------------------------------------------------------------------
+   3. LAYOUT UTILITIES
+   --------------------------------------------------------------------- */
+
+/* .wrap centers content and caps its width — reused on every section
+   so the whole page shares one consistent horizontal rhythm. */
+.wrap {
+  width: 100%;
+  max-width: var(--content-width);
+  margin-inline: auto; /* shorthand for margin-left + margin-right: auto */
+  padding-inline: var(--space-sm);
+}
+
+/* Hides content visually while keeping it available to screen readers —
+   used for the skip link (until focused) and "Menu" label text. */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  left: -999px;
+  top: 0;
+  background: var(--color-ink);
+  color: var(--color-paper-white);
+  padding: var(--space-xs) var(--space-sm);
+  z-index: 100;
+}
+.skip-link:focus {
+  left: var(--space-sm);
+  top: var(--space-sm);
+}
+
+/* Honeypot field: hidden from sighted users via positioning + opacity
+   rather than display:none/visibility:hidden. Some spam bots are
+   coded to specifically skip display:none fields (since that's the
+   "obvious" honeypot trick), so pushing it off-screen and making it
+   transparent is a slightly more robust trick. */
+.visually-hidden-honeypot {
+  position: absolute;
+  left: -5000px;
+  opacity: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-brass);
+  margin-bottom: var(--space-xs);
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 1.1;
+  color: var(--color-ink);
+}
+
+h2 {
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  margin-bottom: var(--space-md);
+}
+
+/* A generic "section" spacing wrapper reused across the page. */
+.section {
+  padding-block: var(--space-xl);
+}
+
+.section-muted {
+  background-color: var(--color-paper-white);
+}
+
+/* ---------------------------------------------------------------------
+   4a. HEADER / NAV
+   --------------------------------------------------------------------- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background-color: var(--color-paper);
+  border-bottom: 1px solid var(--color-shadow);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-block: var(--space-sm);
+}
+
+.brand {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-xs);
+  text-decoration: none;
+}
+
+.brand-mark {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  border: 1px solid var(--color-ink);
+  padding: 0.15rem 0.4rem;
+}
+
+.brand-name {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+.brand-name em {
+  color: var(--color-red);
+  font-style: normal;
+}
+
+/* Nav is a <ul> of links laid out with flexbox — one of the two main
+   CSS layout systems (the other being Grid, used below in .card-grid).
+   Flexbox is ideal for a single row/column of items like this. */
+.primary-nav ul {
+  display: flex;
+  gap: var(--space-md);
+  list-style: none;
+  padding: 0;
+}
+
+.primary-nav a {
+  text-decoration: none;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding-block: var(--space-xs);
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.15s ease;
+}
+.primary-nav a:hover,
+.primary-nav a:focus-visible {
+  border-color: var(--color-red);
+}
+/* aria-current="page" is set in the HTML on the active link; we hook
+   into that attribute directly instead of adding a separate CSS class. */
+.primary-nav a[aria-current="page"] {
+  border-color: var(--color-brass);
+}
+
+/* Hamburger button — hidden by default (desktop-first for THIS one
+   component, shown only under the max-width media query below). */
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 4px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--space-xs);
+}
+.nav-toggle-bar {
+  width: 22px;
+  height: 2px;
+  background-color: var(--color-ink);
+}
+
+/* ---------------------------------------------------------------------
+   4b. HERO
+   --------------------------------------------------------------------- */
+.hero {
+  padding-block: var(--space-xl);
+}
+
+.hero-title {
+  font-size: clamp(2.5rem, 7vw, 4.5rem);
+  margin-block: var(--space-sm) var(--space-md);
+}
+
+/* The "deboss" effect: layered text-shadows simulate a letterpress
+   impression pushed into paper — a light shadow above-left and a
+   darker one below-right of the text. This is the page's signature
+   visual detail, tying the CSS technique directly back to the
+   subject (real letterpress printing debosses paper). */
+.deboss {
+  color: var(--color-paper);
+  -webkit-text-stroke: 1px var(--color-ink);
+  text-shadow:
+    1px 1px 0 var(--color-paper-white),
+    -1px -1px 1px var(--color-shadow);
+}
+
+.hero-lede {
+  max-width: 38ch; /* "ch" = width of the "0" character; great for
+                       capping line length so paragraphs stay readable */
+  font-size: 1.1rem;
+  color: var(--color-ink-soft);
+  margin-bottom: var(--space-md);
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+/* Buttons share a base look, then two modifier classes change color. 
+   This "base + modifier" pattern avoids repeating shared rules. */
+.btn {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  padding: 0.85rem 1.5rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--color-ink);
+  transition: transform 0.15s ease, background-color 0.15s ease, color 0.15s ease;
+  cursor: pointer;
+}
+.btn:hover,
+.btn:focus-visible {
+  transform: translateY(-2px);
+}
+.btn-primary {
+  background-color: var(--color-ink);
+  color: var(--color-paper-white);
+}
+.btn-primary:hover,
+.btn-primary:focus-visible {
+  background-color: var(--color-red);
+  border-color: var(--color-red);
+}
+.btn-ghost {
+  background-color: transparent;
+  color: var(--color-ink);
+}
+.btn-ghost:hover,
+.btn-ghost:focus-visible {
+  background-color: var(--color-paper-white);
+}
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ---------------------------------------------------------------------
+   4c. CARD GRID ("What we make")
+   CSS Grid is used here (rather than Flexbox) because we're laying
+   out a two-dimensional collection of equal-ish cards, which is
+   exactly the problem Grid was designed for.
+   --------------------------------------------------------------------- */
+.card-grid {
+  display: grid;
+  grid-template-columns: 1fr; /* one column by default (mobile) */
+  gap: var(--space-md);
+  margin-top: var(--space-lg);
+}
+
+.card {
+  background-color: var(--color-paper-white);
+  border: 1px solid var(--color-shadow);
+  padding: var(--space-md);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.card:hover {
+  box-shadow: 4px 4px 0 var(--color-shadow);
+}
+.card h3 {
+  font-size: 1.25rem;
+  margin-bottom: var(--space-xs);
+}
+.card p {
+  color: var(--color-ink-soft);
+  margin-bottom: var(--space-sm);
+}
+.card a {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  text-decoration: none;
+  color: var(--color-red);
+}
+
+/* A tiny nod to hand-set wood type sitting slightly askew on a
+   composing stick — subtle rotation on two of the three cards. */
+.card-tilt-left {
+  transform: rotate(-0.6deg);
+}
+.card-tilt-right {
+  transform: rotate(0.6deg);
+}
+
+/* ---------------------------------------------------------------------
+   4d. ABOUT TEASER
+   --------------------------------------------------------------------- */
+.about-inner {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+  align-items: center;
+}
+
+.link-underline {
+  display: inline-block;
+  margin-top: var(--space-sm);
+  text-decoration: underline;
+  text-decoration-color: var(--color-brass);
+  text-underline-offset: 4px;
+}
+
+/* A big decorative letterform swatch standing in for a photo of the
+   press in action — avoids needing an image asset for this demo. */
+.plate-swatch {
+  font-family: var(--font-display);
+  font-size: clamp(6rem, 20vw, 10rem);
+  text-align: center;
+  color: var(--color-paper-white);
+  background-color: var(--color-ink);
+  aspect-ratio: 1 / 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius);
+}
+
+/* ---------------------------------------------------------------------
+   4e. CONTACT FORM
+   --------------------------------------------------------------------- */
+.contact-inner {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.contact-intro p {
+  color: var(--color-ink-soft);
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.form-row label {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.form-row input,
+.form-row textarea {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  padding: 0.75rem;
+  border: 1px solid var(--color-ink-soft);
+  border-radius: var(--radius);
+  background-color: var(--color-paper-white);
+  color: var(--color-ink);
+}
+
+.form-row input:focus,
+.form-row textarea:focus {
+  border-color: var(--color-brass);
+}
+
+/* Applied by script.js when a field fails Zod validation. Keeping the
+   "what does invalid look like" rule here in CSS (rather than JS
+   inlining styles) keeps concerns nicely separated. */
+.form-row.invalid input,
+.form-row.invalid textarea {
+  border-color: var(--color-error);
+}
+
+.field-error {
+  min-height: 1.1em; /* reserves space so layout doesn't jump when an
+                         error message appears/disappears */
+  font-size: 0.85rem;
+  color: var(--color-error);
+}
+
+.form-status {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+}
+.form-status[data-state="success"] {
+  color: var(--color-success);
+}
+.form-status[data-state="error"] {
+  color: var(--color-error);
+}
+
+/* ---------------------------------------------------------------------
+   4f. FOOTER
+   --------------------------------------------------------------------- */
+.site-footer {
+  border-top: 1px solid var(--color-shadow);
+  padding-block: var(--space-lg);
+  background-color: var(--color-paper-white);
+}
+
+.footer-inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--color-ink-soft);
+}
+
+.footer-inner nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm) var(--space-md);
+  list-style: none;
+  padding: 0;
+}
+.footer-inner nav a {
+  text-decoration: none;
+}
+.footer-inner nav a:hover {
+  color: var(--color-red);
+}
+
+/* =======================================================================
+   5. MEDIA QUERIES — mobile-first, so these ADD layout as space allows.
+   ======================================================================= */
+
+/* Small screens only: show the hamburger, hide the full nav list until
+   it's toggled open by script.js (which adds/removes .is-open). */
+@media (max-width: 46rem) {
+  .nav-toggle {
+    display: flex;
+  }
+
+  .primary-nav {
+    position: absolute;
+    inset-inline: 0;
+    top: 100%;
+    background-color: var(--color-paper);
+    border-bottom: 1px solid var(--color-shadow);
+    display: none; /* JS toggles this via the .is-open class below */
+  }
+  .primary-nav.is-open {
+    display: block;
+  }
+  .primary-nav ul {
+    flex-direction: column;
+    gap: 0;
+    padding: var(--space-sm);
+  }
+  .primary-nav a {
+    display: block;
+    padding: var(--space-sm) 0;
+  }
+}
+
+/* Tablet and up: cards sit two-per-row, about section becomes a
+   two-column layout instead of stacked. */
+@media (min-width: 40rem) {
+  .card-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .about-inner {
+    grid-template-columns: 3fr 2fr;
+  }
+  .contact-inner {
+    grid-template-columns: 1fr 1.4fr;
+    align-items: start;
+  }
+}
+
+/* Desktop: cards go three-per-row now that there's room. */
+@media (min-width: 60rem) {
+  .card-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<!--
+  =====================================================================
+  MARROW & TYPE — Homepage (index.html)
+  =====================================================================
+  This file is the SKELETON of the page. Its only job is to describe
+  the structure and meaning of the content (this is what "semantic
+  HTML" means). All visual styling lives in styles.css, and all
+  behaviour/interactivity lives in script.js. Keeping these three
+  concerns separate is the first big lesson in "web anatomy":
+
+      HTML  = structure / meaning   (the skeleton)
+      CSS   = presentation          (the skin & clothes)
+      JS    = behaviour             (the muscles & nerves)
+
+  This is page 1 of 5. The other four (products.html, services.html,
+  about.html, contact.html) are referenced by the nav below as
+  PLACEHOLDER links — the files don't exist yet, so clicking them
+  will 404 until you build them in later steps.
+  =====================================================================
+-->
+<html lang="en">
+<head>
+  <!-- Character encoding must be declared first so the browser reads
+       the rest of the byte stream correctly (handles special chars, é, —, etc.) -->
+  <meta charset="UTF-8" />
+
+  <!-- Tells mobile browsers to render the page at device width instead
+       of a zoomed-out "desktop simulation". Without this, responsive
+       CSS media queries below basically don't work on phones. -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Marrow &amp; Type — Letterpress Studio</title>
+  <meta name="description" content="Marrow & Type is a small-batch letterpress studio crafting wedding suites, business stationery, and art prints by hand." />
+
+  <!-- Google Fonts: we load three type families that each play a
+       different role in the design system (see styles.css comments):
+       Fraunces = display/headline face, Lora = body copy,
+       JetBrains Mono = labels, nav, and small utility text. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..700&family=JetBrains+Mono:wght@400;500&family=Lora:ital,wght@0,400;0,500;1,400&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- Our own stylesheet. Order matters: this comes AFTER the font
+       link so our CSS can safely assume the fonts are on their way. -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- =================================================================
+       SKIP LINK — an accessibility pattern. It's visually hidden until
+       it receives keyboard focus (Tab key), at which point it lets a
+       keyboard/screen-reader user jump straight past the nav.
+       ================================================================= -->
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <!-- =================================================================
+       HEADER / NAVIGATION
+       <header> here represents introductory content for the whole
+       page. <nav> specifically marks up a block of navigation links
+       so browsers/screen readers/search engines know what it's for.
+       ================================================================= -->
+  <header class="site-header" id="top">
+    <div class="wrap header-inner">
+      <a href="index.html" class="brand" aria-label="Marrow & Type — home">
+        <span class="brand-mark" aria-hidden="true">M&amp;T</span>
+        <span class="brand-name">Marrow <em>&amp;</em> Type</span>
+      </a>
+
+      <!-- The hamburger button is only shown on small screens (see CSS).
+           aria-expanded is toggled by script.js so assistive tech knows
+           whether the menu is open or closed. -->
+      <button
+        class="nav-toggle"
+        id="nav-toggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="primary-nav"
+      >
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+        <span class="visually-hidden">Menu</span>
+      </button>
+
+      <!-- PLACEHOLDER NAV LINKS
+           These files don't exist yet — they're stand-ins for the
+           pages you'll build next. "Home" is marked aria-current so
+           both sighted and screen-reader users know where they are. -->
+      <nav class="primary-nav" id="primary-nav" aria-label="Primary">
+        <ul>
+          <li><a href="index.html" aria-current="page">Home</a></li>
+          <li><a href="products.html">Products</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- =================================================================
+       MAIN CONTENT
+       There should only ever be ONE <main> per page — it wraps the
+       content that is unique to this page (as opposed to the header/
+       footer, which repeat on every page).
+       ================================================================= -->
+  <main id="main-content">
+
+    <!-- ---------------- HERO ---------------- -->
+    <section class="hero">
+      <div class="wrap hero-inner">
+        <p class="eyebrow">Est. small batch &middot; hand-set &middot; letterpress</p>
+        <h1 class="hero-title">
+          Every letter,<br />
+          <span class="deboss">pressed by hand.</span>
+        </h1>
+        <p class="hero-lede">
+          We design and print wedding suites, stationery, and art editions the
+          slow way — inked plates, real paper, a hand-cranked press, and a lot
+          of patience.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="products.html">See the work</a>
+          <a class="btn btn-ghost" href="#contact">Get a quote</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------------- WHAT WE MAKE ---------------- -->
+    <section class="section" aria-labelledby="offerings-heading">
+      <div class="wrap">
+        <p class="eyebrow">What we make</p>
+        <h2 id="offerings-heading">Three ways we get ink on paper</h2>
+
+        <!-- Each <article> below is a self-contained "card" — using
+             <article> (not just <div>) signals that each block could
+             stand alone, which is semantically true here. -->
+        <div class="card-grid">
+          <article class="card card-tilt-left">
+            <h3>Wedding Suites</h3>
+            <p>Invitations, RSVPs, and day-of paper that feel like keepsakes, not printouts.</p>
+            <a href="products.html">View suites &rarr;</a>
+          </article>
+
+          <article class="card">
+            <h3>Business Stationery</h3>
+            <p>Letterheads, cards, and packaging inserts with real texture and weight.</p>
+            <a href="services.html">View services &rarr;</a>
+          </article>
+
+          <article class="card card-tilt-right">
+            <h3>Art Editions</h3>
+            <p>Small numbered print runs, made in the studio, one plate at a time.</p>
+            <a href="products.html">View editions &rarr;</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------------- ABOUT TEASER ---------------- -->
+    <section class="section section-muted" aria-labelledby="about-heading">
+      <div class="wrap about-inner">
+        <div>
+          <p class="eyebrow">The studio</p>
+          <h2 id="about-heading">A one-room press, running since 2015</h2>
+          <p>
+            Marrow &amp; Type is a two-person studio built around a single
+            restored proofing press. We keep runs small on purpose — it's
+            the only way the impression stays this deep.
+          </p>
+          <a class="link-underline" href="about.html">Read our story &rarr;</a>
+        </div>
+        <div class="plate-swatch" aria-hidden="true">Aa</div>
+      </div>
+    </section>
+
+    <!-- ---------------- CONTACT / WEB3FORMS ---------------- -->
+    <section class="section" id="contact" aria-labelledby="contact-heading">
+      <div class="wrap contact-inner">
+        <div class="contact-intro">
+          <p class="eyebrow">Get a quote</p>
+          <h2 id="contact-heading">Tell us what you're printing</h2>
+          <p>
+            Fill in the form and we'll reply within two business days with a
+            rough estimate and lead time.
+          </p>
+        </div>
+
+        <!--
+          FORM NOTES (read this before wiring it up):
+
+          1. WEB3FORMS ACCESS KEY
+             Paste your key into the hidden "access_key" input below,
+             replacing YOUR_WEB3FORMS_ACCESS_KEY_HERE. Get a free key at
+             https://web3forms.com — no backend/server needed, script.js
+             submits this form to their API with fetch().
+
+          2. VALIDATION
+             We deliberately do NOT rely on the browser's built-in
+             `required`/`type="email"` validation alone. script.js uses a
+             Zod schema to re-validate every field on submit, because
+             client-side HTML validation is easy for a user (or bot) to
+             bypass. Real security/validation always also happens
+             server-side — Web3Forms does its own checks on their end too.
+
+          3. HONEYPOT SPAM PROTECTION
+             The "botcheck" field below is invisible to humans but visible
+             to most simple spam bots, which blindly fill in every field
+             they find. If it has a value when the form is submitted, we
+             silently treat the submission as spam (see script.js). Note
+             we avoid `display:none` for this field — some bots specifically
+             skip display:none/hidden inputs, so we hide it with CSS
+             positioning + opacity instead (see .visually-hidden-honeypot
+             in styles.css), which fools more of them.
+        -->
+        <form id="contact-form" class="contact-form" novalidate>
+
+          <!-- 1. Web3Forms access key — PASTE YOUR KEY BELOW -->
+          <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_ACCESS_KEY_HERE" />
+
+          <!-- Optional but nice: sets the subject line of the email
+               Web3Forms sends you. -->
+          <input type="hidden" name="from_name" value="Marrow & Type — Website Contact Form" />
+
+          <!-- 3. Honeypot field. Real users never see or fill this in. -->
+          <div class="visually-hidden-honeypot" aria-hidden="true">
+            <label for="botcheck">Leave this field empty</label>
+            <input
+              type="checkbox"
+              id="botcheck"
+              name="botcheck"
+              tabindex="-1"
+              autocomplete="off"
+            />
+          </div>
+
+          <div class="form-row">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" autocomplete="name" />
+            <!-- aria-live="polite" means screen readers announce changes
+                 to this element's text without interrupting the user. -->
+            <span class="field-error" id="name-error" aria-live="polite"></span>
+          </div>
+
+          <div class="form-row">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" autocomplete="email" />
+            <span class="field-error" id="email-error" aria-live="polite"></span>
+          </div>
+
+          <div class="form-row">
+            <label for="subject">Subject</label>
+            <input type="text" id="subject" name="subject" autocomplete="off" />
+            <span class="field-error" id="subject-error" aria-live="polite"></span>
+          </div>
+
+          <div class="form-row">
+            <label for="message">Project details</label>
+            <textarea id="message" name="message" rows="5"></textarea>
+            <span class="field-error" id="message-error" aria-live="polite"></span>
+          </div>
+
+          <button type="submit" class="btn btn-primary" id="submit-btn">
+            Send message
+          </button>
+
+          <!-- General (non-field-specific) status messages: "Sending...",
+               "Message sent!", "Something went wrong", etc. -->
+          <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- =================================================================
+       FOOTER
+       Repeats the nav (again, placeholders) plus a JS-generated year.
+       ================================================================= -->
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <nav aria-label="Footer">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="products.html">Products</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+      <!-- This span starts empty; script.js fills in the current year
+           on page load so the copyright date never goes stale. -->
+      <p>&copy; <span id="current-year">2026</span> Marrow &amp; Type Studio.</p>
+    </div>
+  </footer>
+
+  <!--
+    SCRIPT LOADING NOTES:
+    - type="module" lets script.js use ES Module `import` statements
+      (we import the Zod validation library from a CDN inside script.js).
+    - Placing <script> at the very end of <body> (or using defer, which
+      module scripts get automatically) means the HTML above is fully
+      parsed and in the DOM before our JS runs and tries to grab
+      elements like #contact-form.
+  -->
+  <script type="module" src="script.js"></script>
+</body>
+</html>
